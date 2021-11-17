@@ -1,33 +1,33 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 
-import {BASE_URL, KEY} from './api/index'
+// import {BASE_URL, KEY} from './api/index'
 
 // These imports won't work until you fix ./components/index.js
 import {
-  // Feature,
+  Feature,
   Loading,
-  // Preview,
+  Preview,
   Search,
   Title
 } from './components';
 
-function fetchObjects() {
-  const url = `${ BASE_URL }/object?${ KEY }`;
+// function fetchObjects() {
+//   const url = `${ BASE_URL }/object?${ KEY }`;
 
-  fetch(url)
-      .then(function (response) {
-          return response.json()
-      })
-      .then(function (response) {
-          console.log(response);
-      })
-      .catch(function (error) {
-          console.error(error);
-      });
-}
+//   fetch(url)
+//       .then(function (response) {
+//           return response.json()
+//       })
+//       .then(function (response) {
+//           console.log(response);
+//       })
+//       .catch(function (error) {
+//           console.error(error);
+//       });
+// }
 
-fetchObjects();
+// fetchObjects();
 
 const App = () => {
   /**
@@ -39,9 +39,9 @@ const App = () => {
    * isLoading, setIsLoading (default should be false)
    */
 
-   const [searchResults, setSearchResults] = useState({});
-   const [featuredResult, setFeaturedResult] = useState('')
-   const [isLoading, setIsLoading] = useState(false) 
+   const [searchResults, setSearchResults] = useState({ info: {}, records: [] } );
+   const [featuredResult, setFeaturedResult] = useState(null);
+   const [isLoading, setIsLoading] = useState(false);
 
      // const fetchSearchResults = async () => {
   //   const response = await fetch(`${BASE_URL}`);
@@ -62,14 +62,13 @@ const App = () => {
     <Title />
 
     {/* <Search /> needs props for setIsLoading and setSearchResults (trigger <Loading /> on search start/end, and transfer results to preview) */}
-    <Search setIsLoading = {setIsLoading} setSearchResults = {setSearchResults}/>
+    <Search setIsLoading = { setIsLoading } setSearchResults = { setSearchResults }/>
 
     {/* <Preview /> needs props for searchResults, setIsLoading and setSearchResults (clicking prev/next buttons), and setFeaturedResult (clicking a preview) */}
-    {/* <Preview 
-      setSearchResults = {setSearchResults} setIsLoading = {setIsLoading} setFeaturedResult = {setFeaturedResult} /> */}
+    <Preview searchResults = {searchResults} setSearchResults = {setSearchResults} setIsLoading = {setIsLoading} setFeaturedResult = {setFeaturedResult} />
 
     {/* <Feature /> needs props for featuredResult, as well as setIsLoading and setSearchResults (clicking on searchable properties) */}
-    {/* <Feature setFeaturedResult = {setFeaturedResult} setIsLoading = {setIsLoading} setSearchResults = {setSearchResults}/> */}
+    <Feature featuredResult = {featuredResult}setFeaturedResult = {setFeaturedResult} setIsLoading = {setIsLoading} setSearchResults = {setSearchResults}/>
 
     {/* <Loading /> is static, but should only render when isLoading is true */}
     {isLoading ? <Loading /> : null}
