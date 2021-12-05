@@ -68,7 +68,7 @@ const App = () => {
     <Preview searchResults = {searchResults} setSearchResults = {setSearchResults} setIsLoading = {setIsLoading} setFeaturedResult = {setFeaturedResult} />
 
     {/* <Feature /> needs props for featuredResult, as well as setIsLoading and setSearchResults (clicking on searchable properties) */}
-    <Feature featuredResult = {featuredResult}setFeaturedResult = {setFeaturedResult} setIsLoading = {setIsLoading} setSearchResults = {setSearchResults}/>
+    <Feature featuredResult = {featuredResult} setFeaturedResult = {setFeaturedResult} setIsLoading = {setIsLoading} setSearchResults = {setSearchResults}/>
 
     {/* <Loading /> is static, but should only render when isLoading is true */}
     {isLoading ? <Loading /> : null}

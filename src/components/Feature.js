@@ -31,26 +31,26 @@ import { fetchQueryResultsFromTermAndValue } from '../api';
  */
 const Searchable = (props) => {
 
-const { searchTerm, searchValue, setIsLoading, setSearchResults } = props
+  const { searchTerm, searchValue, setIsLoading, setSearchResults } = props
 
   return (
     <span className="content">
-      <a href="#" onClick={async (event) => { 
-          event.preventDefault(); 
-          setIsLoading(true)
+      <a href="#" onClick={async (event) => {
+        event.preventDefault();
+        setIsLoading(true)
 
-          try {
-            const results = await fetchQueryResultsFromTermAndValue({ searchTerm, searchValue });
-            setSearchResults(results);
-          }
-          catch (err) {
-            console.error(err);
-          }
-          finally {
-            setIsLoading(false);
-          }
+        try {
+          const results = await fetchQueryResultsFromTermAndValue({ searchTerm, searchValue });
+          setSearchResults(results);
+        }
+        catch (err) {
+          console.error(err);
+        }
+        finally {
+          setIsLoading(false);
+        }
 
-          }}>SOME SEARCH TERM</a>
+      }}>{searchValue}</a>
     </span>
   )
 }
@@ -91,10 +91,124 @@ const { searchTerm, searchValue, setIsLoading, setSearchResults } = props
  */
 const Feature = (props) => {
 
-const { featuredResult } = props
-    return (
-        <main id="feature"></main>
-    )
+  const { featuredResult } = props
+
+  if (!featuredResult) {
+
+    return <main id="feature"></main>
+
+  }
+  const { title, dated, images, primaryimageurl, description, culture, style, technique, medium, dimensions, people, department, division, contact, creditline } = featuredResult
+
+
+
+  return <main id="feature">
+    <div className="object-feature">
+      <header>
+        <h3>{title}</h3>
+        <h4>{dated}</h4>
+      </header>
+      <section className="facts">
+
+        {description
+          ? <Fragment>
+            <span className="title"> Description: </span>
+            <span className="content"> {description} </span>
+          </Fragment>
+          : null}
+
+        {culture
+          ? <Fragment>
+            <span className="title"> Culture: </span>
+            <span className="content"> {culture} </span>
+          </Fragment>
+          : null}
+
+        {style
+          ? <Fragment>
+            <span className="title"> Style: </span>
+            <span className="content"> {style} </span>
+          </Fragment>
+          : null}
+
+        {technique
+          ? <Fragment>
+            <span className="title"> Technique: </span>
+            <span className="content"> {technique} </span>
+          </Fragment>
+          : null}
+
+        {medium
+          ? <Fragment>
+            <span className="title"> Medium: </span>
+            <span className="content"> {medium} </span>
+          </Fragment>
+          : null}
+
+        {dimensions
+          ? <Fragment>
+            <span className="title"> Dimensions: </span>
+            <span className="content"> {dimensions} </span>
+          </Fragment>
+          : null}
+
+        {people
+          ? <Fragment>
+            <span className="title"> People: </span>
+            <span className="content"> {people} </span>
+          </Fragment>
+          : null}
+        
+        {department
+          ? <Fragment>
+            <span className="title"> Department: </span>
+            <span className="content"> {department} </span>
+          </Fragment>
+          : null}
+
+        {division
+          ? <Fragment>
+            <span className="title"> Division: </span>
+            <span className="content"> {division} </span>
+          </Fragment>
+          : null}
+
+        {contact
+          ? <Fragment>
+            <span className="title"> Contact: </span>
+            <span className="content"> {contact} </span>
+          </Fragment>
+          : null}
+
+        {contact
+          ? <Fragment>
+            <span className="title"> Contact: </span>
+            <span className="content"> {contact} </span>
+          </Fragment>
+          : null}
+
+        {creditline
+          ? <Fragment>
+            <span className="title"> Creditline: </span>
+            <span className="content"> {creditline} </span>
+          </Fragment>
+          : null}
+
+
+      </section>
+      <section className="photos">
+          { images && images.length > 0 
+          ? images.map((images) => 
+            <img key={images.baseimageurl} src={images.baseimageurl} alt={images.baseimageurl} />
+          ) : primaryimageurl 
+          ? <img key={primaryimageurl } src={primaryimageurl } alt={primaryimageurl } />
+           : null
+        } 
+        
+      </section>
+    </div>
+  </main>
+
 
 }
 
