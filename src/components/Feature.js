@@ -201,7 +201,7 @@ const Feature = (props) => {
           ? images.map((images) => 
             <img key={images.baseimageurl} src={images.baseimageurl} alt={images.baseimageurl} />
           ) : primaryimageurl 
-          ? <img key={primaryimageurl } src={primaryimageurl } alt={primaryimageurl } />
+          ? <img src={primaryimageurl } alt={primaryimageurl } />
            : null
         } 
         
